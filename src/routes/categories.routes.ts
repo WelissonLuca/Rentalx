@@ -11,6 +11,11 @@ const categoriesRepositorie = new CategoriesRepositorie
 categoriesRoutes.post('/', (request, response) => {
   const { name, description } = request.body;
 
+  const cateogryAlreadExists = categoriesRepositorie.findByname(name);
+
+  if (cateogryAlreadExists)
+    return response.status(400).json({error: "Category Alread Exits!"})
+ 
   categoriesRepositorie.create({ name, description });
 
   return response.status(201).send();
