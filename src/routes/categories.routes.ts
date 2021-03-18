@@ -1,22 +1,19 @@
 import {  Router } from 'express';
 import { v4 as uuidV4 } from 'uuid'
-import { CategoriesRepositorie } from '../repositories/CategoriesRepositories'
-
+import { CategoriesRepository } from '../repositories/CategoriesRepositories'
+import { CreateCategoryService } from '../services/CreateCategoryService'
 
 const categoriesRoutes = Router();
 
-const categoriesRepositorie = new CategoriesRepositorie
+const categoriesRepositorie = new CategoriesRepository
 
 
 categoriesRoutes.post('/', (request, response) => {
   const { name, description } = request.body;
 
-  const cateogryAlreadExists = categoriesRepositorie.findByname(name);
+  const createCategoryService = new CreateCategoryService(categoriesRepositorie);
 
-  if (cateogryAlreadExists)
-    return response.status(400).json({error: "Category Alread Exits!"})
- 
-  categoriesRepositorie.create({ name, description });
+  createCategoryService.execute({name, description})
 
   return response.status(201).send();
 
