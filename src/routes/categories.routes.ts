@@ -1,14 +1,16 @@
 import { Router } from 'express';
 import { v4 as uuidV4 } from 'uuid';
 import { CategoriesRepository } from '../modules/cars/repositories/CategoriesRepository';
-import { createCategorController } from '../modules/cars/useCases/createCategory';
+import { createCategoryController } from '../modules/cars/useCases/createCategory';
+
+
 
 const categoriesRoutes = Router();
 
 const categoriesRepositorie = new CategoriesRepository();
 
 categoriesRoutes.post('/', (request, response) => {
-  return createCategorController.handle(request, response);
+  return createCategoryController.handle(request, response);
 });
 
 categoriesRoutes.get('/', (request, response) => {
