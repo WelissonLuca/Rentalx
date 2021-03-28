@@ -7,25 +7,25 @@
         "contact": {
             "email": "welissonluca17@gmail.com"
         }
-
-
     },
     "paths": {
         "/categories": {
             "post": {
-                "tags": ["category"],
+                "tags": [
+                    "Category"
+                ],
                 "sumary": "Create a category",
                 "description": "Create a new category",
                 "requestBody": {
                     "content": {
-                        "application/json":{
-                            "schema":{
+                        "application/json": {
+                            "schema": {
                                 "type": "object",
-                                "properties":{
-                                    "name":{
+                                "properties": {
+                                    "name": {
                                         "type": "string"
                                     },
-                                    "declaration":{
+                                    "declaration": {
                                         "type": "string"
                                     }
                                 },
@@ -37,12 +37,42 @@
                         }
                     }
                 },
-                "responses":{
+                "responses": {
                     "201": {
                         "description": "Created"
                     },
-                    "500":{
+                    "500": {
                         "description": "category already exists"
+                    }
+                }
+            },
+            "get": {
+                "tag": [
+                    "Category"
+                ],
+                "sumary": "List all categories",
+                "description": "List all categories",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "code": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
