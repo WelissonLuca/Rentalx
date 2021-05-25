@@ -17,30 +17,30 @@ class ImportCategoryUseCase {
 
       stream.pipe(parseFile);
 
-      parseFile.on('data', async (line) => {
-        const [name, description] = line;
-        categories.push({ name, description });
-        
-      }).on('end', () => {
-        fs.promises.unlink(file.path);
-        resolve(categories);
-      }).on('error', (err) => {
-        reject(err);
-      })
-
-   })
+      parseFile
+        .on('data', async (line) => {
+          const [name, description] = line;
+          categories.push({ name, description });
+        })
+        .on('end', () => {
+          fs.promises.unlink(file.path);
+          resolve(categories);
+        })
+        .on('error', (err) => {
+          reject(err);
+        });
+    });
   }
- async execute(file: Express.Multer.File): Promise<void> {
-   const categories = await this.loadCategories(file);
-   categories.map(async category => {
-     const { name, description } = category;
+  async execute(file: Express.Multer.File): Promise<void> {
+    const categories = await this.loadCategories(file);
+    categories.map(async (category) => {
+      const { name, description } = category;
 
-     const existCategory = await this.categoriesRepository.findByName(name);
+      const existCategory = await this.categoriesRepository.findByName(name);
 
-     if (!existCategory)
-       this.categoriesRepository.create({name, description})
-
-   })
+      if (!existCategory)
+        this.categoriesRepository.create({ name, description });
+    });
   }
 }
 

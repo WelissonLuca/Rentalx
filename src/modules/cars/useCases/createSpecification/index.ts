@@ -10,4 +10,4 @@ const createSpecificationController = new CreateSpecificationController(
   createSpecificationsUseCase
 );
 
-export { createSpecificationController }
+export { createSpecificationController };
