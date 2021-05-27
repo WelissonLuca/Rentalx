@@ -23,7 +23,7 @@
         "camelcase": "off",
         "import/no-unresolved": "error",
         "@typescript-eslint/naming-convention": [
-            "error",
+            "off",
             {
                 "selector": "interface",
                 "format": [
