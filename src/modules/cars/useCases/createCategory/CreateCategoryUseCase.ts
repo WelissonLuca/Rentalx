@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { ICategoriesRepository } from '../../repositories/ICategoriesRepository';
 
-interface Irequest {
+interface ICreateCategoryDTO {
   name: string;
   description: string;
 }
@@ -12,14 +12,15 @@ class CreateCategoryUseCase {
     @inject('CategoriesRepository')
     private categoriesRepository: ICategoriesRepository
   ) {}
-  async execute({ name, description }: Irequest): Promise<void> {
-    const cateogryAlreadExists = await this.categoriesRepository.findByName(
-      name
-    );
 
-    if (cateogryAlreadExists) throw new Error('Category Already Exists!');
+  async execute({ name, description }: ICreateCategoryDTO): Promise<void> {
+    const foundCategory = await this.categoriesRepository.findByName(name);
 
-    this.categoriesRepository.create({ name, description });
+    if (foundCategory) {
+      throw new Error('Category already exists.');
+    }
+
+    await this.categoriesRepository.create({ name, description });
   }
 }
 

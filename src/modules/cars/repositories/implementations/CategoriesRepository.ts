@@ -12,27 +12,18 @@ class CategoriesRepository implements ICategoriesRepository {
     this.repository = getRepository(Category);
   }
 
-  /* public static getInstance(): CategoriesRepository {
-    if (!CategoriesRepository.INSTANCE)
-      CategoriesRepository.INSTANCE = new CategoriesRepository();
-
-    return CategoriesRepository.INSTANCE;
-  } */
-
   async create({ description, name }: ICreateCategoryDTO): Promise<void> {
     const category = this.repository.create({ description, name });
 
     await this.repository.save(category);
   }
 
-  async list(): Promise<void> {
-    const categories = await this.repository.find();
+  async list(): Promise<Category[]> {
+    return this.repository.find();
   }
 
   async findByName(name: string): Promise<Category> {
-    const category = await this.repository.findOne({ name });
-
-    return category;
+    return this.repository.findOne({ name });
   }
 }
 

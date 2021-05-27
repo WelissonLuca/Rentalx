@@ -9,12 +9,12 @@ const upload = multer({
   dest: './tmp',
 });
 
+const listCategoriesController = new ListCategoriesController();
 const createCategoryController = new CreateCategoryController();
 const importCategoryController = new ImportCategoryController();
-const listCategoriesController = new ListCategoriesController();
-categoriesRoutes.post('/', createCategoryController.handle);
 
 categoriesRoutes.get('/', listCategoriesController.handle);
+categoriesRoutes.post('/', createCategoryController.handle);
 
 categoriesRoutes.post(
   '/import',
