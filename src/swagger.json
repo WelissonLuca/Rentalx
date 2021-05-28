@@ -1,21 +1,50 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Rentalx Dccumentation",
-        "description": "This is an API Rent",
+        "title": "RentX API",
+        "description": "This is a car rent API",
         "version": "1.0.0",
         "contact": {
             "email": "welissonluca17@gmail.com"
         }
     },
     "paths": {
+        "/categories/import": {
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Import categories",
+                "description": "Import categories from a csv file.",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Resources created sucessfully."
+                    }
+                }
+            }
+        },
         "/categories": {
             "post": {
                 "tags": [
-                    "Category"
+                    "Categories"
                 ],
-                "sumary": "Create a category",
-                "description": "Create a new category",
+                "summary": "Create category",
+                "description": "Creates a new category",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -25,13 +54,13 @@
                                     "name": {
                                         "type": "string"
                                     },
-                                    "declaration": {
+                                    "description": {
                                         "type": "string"
                                     }
                                 },
                                 "example": {
-                                    "name": "category name sample",
-                                    "descritpion": "Category description sample"
+                                    "name": "SUV",
+                                    "description": "this is a SUV"
                                 }
                             }
                         }
@@ -39,23 +68,23 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Created"
+                        "description": "Resource created sucessfully."
                     },
-                    "500": {
-                        "description": "category already exists"
+                    "400": {
+                        "description": "Category already exists."
                     }
                 }
             },
             "get": {
-                "tag": [
-                    "Category"
+                "tags": [
+                    "Categories"
                 ],
-                "sumary": "List all categories",
+                "summary": "List all categories",
                 "description": "List all categories",
                 "responses": {
                     "200": {
-                        "description": "Success",
-                        "code": {
+                        "description": "Resources returned sucessfully.",
+                        "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "array",
@@ -73,6 +102,44 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/specifications": {
+            "post": {
+                "tags": [
+                    "Specifications"
+                ],
+                "summary": "Create specification",
+                "description": "creates a new specification",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "name": "Air conditionator",
+                                "description": "AC integrated"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created sucessfully."
+                    },
+                    "400": {
+                        "description": "Specification already exists."
                     }
                 }
             }
