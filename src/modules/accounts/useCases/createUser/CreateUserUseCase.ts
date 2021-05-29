@@ -5,7 +5,7 @@ import { IUsersRepository } from '../../repositories/IUsersRepository';
 @injectable()
 class CreateUserUseCase {
   constructor(
-    @inject('UsersRepository')
+    @inject('UserRepository')
     private userRepository: IUsersRepository
   ) {}
 
@@ -16,7 +16,7 @@ class CreateUserUseCase {
     password,
     driver_license,
   }: ICreateUserDTO): Promise<void> {
-    await repository.userRepository.create({
+    await this.userRepository.create({
       name,
       username,
       email,
