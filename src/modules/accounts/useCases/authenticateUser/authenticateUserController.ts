@@ -4,13 +4,19 @@ import { AuthenticateUSerUseCase } from './authenticateUserUseCase';
 
 class AuthenticateUSerController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { password, email } = request.body;
+    try {
+      const { password, email } = request.body;
 
-    const authenticateUSerUseCase = container.resolve(AuthenticateUSerUseCase);
+      const authenticateUSerUseCase = container.resolve(
+        AuthenticateUSerUseCase
+      );
 
-    const token = await authenticateUSerUseCase.execute({ password, email });
+      const token = await authenticateUSerUseCase.execute({ password, email });
 
-    return response.json(token);
+      return response.json(token);
+    } catch (error) {
+      return response.status(400).json({ error: error.message });
+    }
   }
 }
 
