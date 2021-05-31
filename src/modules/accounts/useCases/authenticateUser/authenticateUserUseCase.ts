@@ -29,7 +29,7 @@ class AuthenticateUSerUseCase {
 
     if (!passwordMatch) throw new Error('Email or password incorrect');
 
-    const token = sign({}, ' f7166771e7be1c63a6151e0fee45ab0b', {
+    const token = sign({}, 'f7166771e7be1c63a6151e0fee45ab0b', {
       subject: user.id,
       expiresIn: '1d',
     });
