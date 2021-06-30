@@ -1,10 +1,10 @@
 {
   "type": "postgres",
   "port": 5432,
-  "host": "localhost", 
-  "username": "docker",
-  "password": "ignite",
-  "database": "rentx",
+  "host": "batyr.db.elephantsql.com", 
+  "username": "cupgnlny",
+  "password": "X0ujIaN6cw37oxMznJuqbEyfVfv9d8ye",
+  "database": "cupgnlny",
   "migrations": [
     "./src/database/migrations/*.ts"
   ],
