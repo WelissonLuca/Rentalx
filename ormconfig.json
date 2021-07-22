@@ -1,10 +1,6 @@
 {
+  "url": "postgres://cupgnlny:X0ujIaN6cw37oxMznJuqbEyfVfv9d8ye@batyr.db.elephantsql.com/cupgnlny",
   "type": "postgres",
-  "port": 5432,
-  "host": "batyr.db.elephantsql.com", 
-  "username": "cupgnlny",
-  "password": "X0ujIaN6cw37oxMznJuqbEyfVfv9d8ye",
-  "database": "cupgnlny",
   "migrations": [
     "./src/database/migrations/*.ts"
   ],
