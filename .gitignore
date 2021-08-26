@@ -7,3 +7,4 @@ dist
 .env
 ormconfig.json
 coverage
+*.log
