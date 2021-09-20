@@ -1,7 +1,10 @@
 import { AppError } from '@shared/errors/appError';
+
 import { CategoriesRepositoryInMemory } from '@modules/cars/repositories/in-memory/CategoriesRepositoryInMemory';
+import { Category } from '@modules/cars/infra/typeorm/entities/Category';
 import { CreateCategoryUseCase } from './CreateCategoryUseCase';
 
+let category: Category;
 let createCategoryUseCase: CreateCategoryUseCase;
 let categoriesRepositoryInMemory: CategoriesRepositoryInMemory;
 describe('Create Category', () => {

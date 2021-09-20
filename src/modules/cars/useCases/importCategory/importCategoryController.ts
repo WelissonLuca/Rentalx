@@ -8,7 +8,8 @@ class ImportCategoryController {
     const { file } = request;
     const importCategoryUseCase = container.resolve(ImportCategoryUseCase);
 
-    await importCategoryUseCase.execute(file);
+    const categories = await importCategoryUseCase.execute(file);
+
     return response.status(201).send();
   }
 }

@@ -23,7 +23,7 @@ carsRouters.post(
 carsRouters.get('/available', listAvaliableCarsController.handle);
 
 carsRouters.post(
-  '/specifcations/:id',
+  '/specifications/:id',
   ensureAuthenticated,
   ensureAdmin,
   createCarSpecificationController.handle
