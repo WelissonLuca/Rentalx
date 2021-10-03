@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=test ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "test": "NODE_ENV=test jest",
+    "test": "set NODE_ENV=test&&jest  --cache --colors --notify --verbose --runInBand --testTimeout=10000",
     "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts"
   },
   "keywords": [],
@@ -43,6 +43,7 @@
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.2",
+    "node-notifier": "^10.0.0",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "supertest": "^6.1.6",
