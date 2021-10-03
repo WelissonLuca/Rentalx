@@ -7,7 +7,7 @@ import { app } from '@shared/infra/http/app';
 import { connection } from '@shared/infra/typeorm';
 
 let db: Connection;
-describe('Create category controller', () => {
+describe('list categories', () => {
   beforeAll(async () => {
     db = await connection();
 
@@ -21,7 +21,7 @@ describe('Create category controller', () => {
     VALUES ( '${id}', 'Admin', 'admin@rentx.com.br', '${password}', true, NOW(), 'XXXXX' )
   `);
   });
-  it('should be albe to create a new category', async () => {
+  it('should return a list of categories', async () => {
     const responseToken = await request(app).post('/sessions').send({
       email: 'admin@rentx.com.br',
       password: 'admin',
@@ -29,7 +29,7 @@ describe('Create category controller', () => {
 
     const { token } = responseToken.body;
 
-    const response = await request(app)
+    await request(app)
       .post('/categories')
       .send({
         name: 'Category supertest',
@@ -37,26 +37,22 @@ describe('Create category controller', () => {
       })
       .set('Authorization', `Bearer ${token}`);
 
-    expect(response.status).toBe(201);
-  });
-
-  it('should not be albe to create a new category with name exists', async () => {
-    const responseToken = await request(app).post('/sessions').send({
-      email: 'admin@rentx.com.br',
-      password: 'admin',
-    });
-
-    const { token } = responseToken.body;
-
-    const response = await request(app)
+    await request(app)
       .post('/categories')
       .send({
-        name: 'Category supertest',
-        description: 'Category supertest',
+        name: 'Category2 supertest',
+        description: 'Category2 supertest',
       })
       .set('Authorization', `Bearer ${token}`);
 
-    expect(response.status).toBe(400);
+    const response = await request(app)
+      .get('/categories')
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveLength(2);
+    expect(response.body[0]).toHaveProperty('id');
+    expect(response.body[0].name).toEqual('Category supertest');
   });
 
   afterAll(async () => {
