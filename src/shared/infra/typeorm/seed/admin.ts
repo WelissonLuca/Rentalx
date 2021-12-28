@@ -1,20 +1,27 @@
-import { v4 as uuid } from 'uuid';
 import { hash } from 'bcrypt';
+import { v4 as uuidV4 } from 'uuid';
 
-import { connection } from '../index';
+import createConnection from '../index';
 
 async function create() {
-  const db = await connection();
+  const connection = await createConnection('localhost');
 
-  const id = uuid();
-  const password = await hash('admin', 8);
+  const id = uuidV4();
+  const password = await hash('admin', 10);
 
-  await db.query(`
-    INSERT INTO users (id, name, email, password, "isAdmin", created_at, driver_license)
-    VALUES ( '${id}', 'Admin', 'admin@rentx.com.br', '${password}', true, NOW(), 'XXXXX' )
+  await connection.query(`
+    INSERT INTO USERS(
+      id, name, email, password, 
+      "isAdmin", driver_license, created_at
+    ) values (
+      '${id}', 'admin', 'admin@rentx.com.br', '${password}', 
+      true, 'license-admin', 'now()'
+    )
   `);
 
-  await db.close();
+  await connection.close();
 }
 
-create().then(() => console.log('created'));
+create().then(() => {
+  console.log('✅ User admin created');
+});

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=test ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "set NODE_ENV=test&&jest  --cache --colors --notify --verbose --runInBand --testTimeout=10000",
     "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts",
@@ -16,7 +16,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.11",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.0.2",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/multer": "^1.4.7",
     "@types/supertest": "^2.0.11",
